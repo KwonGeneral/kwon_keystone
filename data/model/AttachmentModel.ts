@@ -6,71 +6,77 @@ import * as type from '.keystone/types';
 import {BaseListTypeInfo} from "@keystone-6/core/src/types";
 
 /**
- * @param { AttachmentModel } 파일모델
+ * 첨부 파일 모델
  */
 export let AttachmentModel: core.ListConfig<BaseListTypeInfo> = core.list(
     {
-        /**
-         * @param { access } 접근권한
-         */
+        // 접근 권한
         access: access.allowAll,
 
-        /**
-         * @param { fields } 필드
-         */
+        // 필드 선언
         fields: {
-            /**
-             * @param { name } 파일명
-             */
+            // 이름
             name: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { size } 파일크기
-             */
+            // 헤더
+            header: fields.text({
+                    validation: {isRequired: false}
+                }
+            ),
+
+            // 제목
+            title: fields.text({
+                    validation: {isRequired: false}
+                }
+            ),
+
+            // 내용
+            content: fields.text({
+                    validation: {isRequired: false}
+                }
+            ),
+
+            // 설명
+            description: fields.text({
+                    validation: {isRequired: false}
+                }
+            ),
+
+            // 크기
             size: fields.integer({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { base64 } 파일Base64데이터
-             */
+            // Base64 데이터
             base64: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { extension } 파일확장자
-             */
+            // 확장자
             extension: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { type } 파일타입
-             */
+            // 타입 (0: 이미지, 1: 동영상, 2: 음악, 3: 문서, 4: 기타)
             type: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { updatedAt } 수정날짜
-             */
+            // 수정일
             updatedAt: fields.timestamp({
                     db: {updatedAt: true},
                     defaultValue: {kind: 'now'},
                 }
             ),
 
-            /**
-             * @param { createdAt } 생성날짜
-             */
+            // 생성일
             createdAt: fields.timestamp({
                     defaultValue: {kind: 'now'},
                 }

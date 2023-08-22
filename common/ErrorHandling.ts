@@ -1,30 +1,38 @@
-import {PrismaClient, Prisma} from '@prisma/client';
-import {Log} from './logger';
 import {GraphQLError} from "graphql";
 
+/**
+ * 에러 핸들링
+ */
 export const ErrorHandling = (error: any): { result: any; code: string; message: string } => {
-    let code: string = "0";
-    let message: string = 'FAILED';
-    let prismaErrorName: string = "";
+    let code: string = "P0";
     let target: string = "";
-    if(error instanceof GraphQLError) {
-        // @ts-ignore
-        prismaErrorName = error.extensions.prisma.name;
-        // @ts-ignore
-        target = error.extensions.prisma.meta.target;
-        // @ts-ignore
-        code = error.extensions.prisma.code;
-        message = error.message;
-
-        Log.d("prismaErrorName: " + prismaErrorName);
-        Log.d("target: " + target);
-        Log.d("code: " + code);
-        Log.d("message: " + message);
-    } else if(error instanceof TypeError) {
+    if (error instanceof GraphQLError) {
+        if (error.extensions.prisma != null) {
+            // @ts-ignore
+            target = error.extensions.prisma.meta.target != null ? error.extensions.prisma.meta.target : "";
+            // @ts-ignore
+            code = error.extensions.prisma.code != null ? error.extensions.prisma.code : "P0";
+        }
+    } else if (error instanceof TypeError) {
         code = "P100";
+    } else {
+        code = "P0";
     }
 
+    return {
+        code: code,
+        message: target != "" ? getErrorMessage(code) + " ( " + target + " )" : getErrorMessage(code),
+        result: []
+    }
+}
+
+// 에러 코드에 따른 에러 메시지 반환
+const getErrorMessage = (code: string): string => {
+    let message = "";
     switch (code) {
+        case "P0":
+            message = "알 수 없는 에러 코드입니다.";
+            break;
         case "P100":
             message = "올바르지 않는 타입이 사용되었습니다.";
             break;
@@ -299,12 +307,5 @@ export const ErrorHandling = (error: any): { result: any; code: string; message:
             message = "알 수 없는 에러 코드입니다.";
     }
 
-    if(target != "") {
-        message += " ( " + target + " )";
-    }
-    return {
-        code: code,
-        message: message,
-        result: {}
-    }
+    return message;
 }

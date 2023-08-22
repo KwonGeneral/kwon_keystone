@@ -1,76 +1,56 @@
 import * as fields from '@keystone-6/core/fields';
-import * as fields_document from '@keystone-6/fields-document';
 import * as access from '@keystone-6/core/access';
 import * as core from '@keystone-6/core';
-import * as type from '.keystone/types';
 import {BaseListTypeInfo} from "@keystone-6/core/src/types";
 
 /**
- * @param { RuleModel } 규칙모델
+ * 규칙 모델
  */
 export let RuleModel: core.ListConfig<BaseListTypeInfo> = core.list(
     {
-        /**
-         * @param { access } 접근권한
-         */
+        // 접근 권한
         access: access.allowAll,
 
-        /**
-         * @param { fields } 필드
-         */
+        // 필드 선언
         fields: {
-            /**
-             * @param { name } 규칙명
-             */
+            // 이름
             name: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { header } 규칙헤더
-             */
+            // 헤더
             header: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { title } 규칙제목
-             */
+            // 제목
             title: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { content } 규칙내용
-             */
+            // 내용
             content: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { description } 규칙설명
-             */
+            // 설명
             description: fields.text({
                     validation: {isRequired: false}
                 }
             ),
 
-            /**
-             * @param { updatedAt } 수정날짜
-             */
+            // 수정일
             updatedAt: fields.timestamp({
                     db: {updatedAt: true},
                     defaultValue: {kind: 'now'},
                 }
             ),
 
-            /**
-             * @param { createdAt } 생성날짜
-             */
+            // 생성일
             createdAt: fields.timestamp({
                     defaultValue: {kind: 'now'},
                 }

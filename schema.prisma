@@ -27,19 +27,27 @@ model AppInfoModel {
 }
 
 model AttachmentModel {
-  id        String    @id @default(uuid())
-  name      String    @default("")
-  size      Int?
-  base64    String    @default("")
-  extension String    @default("")
-  type      String    @default("")
-  updatedAt DateTime? @default(now()) @updatedAt
-  createdAt DateTime? @default(now())
+  id          String    @id @default(uuid())
+  name        String    @default("")
+  header      String    @default("")
+  title       String    @default("")
+  content     String    @default("")
+  description String    @default("")
+  size        Int?
+  base64      String    @default("")
+  extension   String    @default("")
+  type        String    @default("")
+  updatedAt   DateTime? @default(now()) @updatedAt
+  createdAt   DateTime? @default(now())
 }
 
 model LocationModel {
   id            String    @id @default(uuid())
   name          String    @default("")
+  header        String    @default("")
+  title         String    @default("")
+  content       String    @default("")
+  description   String    @default("")
   address       String    @default("")
   addressDetail String    @default("")
   latitude      String    @default("")
@@ -50,7 +58,7 @@ model LocationModel {
 
 model PostModel {
   id          String    @id @default(uuid())
-  version     String    @default("")
+  name        String    @default("")
   header      String    @default("")
   title       String    @default("")
   content     String    @default("")

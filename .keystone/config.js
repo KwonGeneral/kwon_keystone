@@ -45,90 +45,66 @@ var access = __toESM(require("@keystone-6/core/access"));
 var core = __toESM(require("@keystone-6/core"));
 var AppInfoModel = core.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { version } 앱버전
-       */
+      // 버전
       version: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { name } 앱이름
-       */
+      // 이름
       name: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { header } 앱헤더
-       */
+      // 헤더
       header: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { title } 앱제목
-       */
+      // 제목
       title: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { content } 앱내용
-       */
+      // 내용
       content: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { description } 앱설명
-       */
+      // 설명
       description: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { buildNumber } 앱빌드번호
-       */
+      // 빌드 번호
       buildNumber: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { packageName } 앱패키지명
-       */
+      // 패키지명
       packageName: fields.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -144,66 +120,72 @@ var access2 = __toESM(require("@keystone-6/core/access"));
 var core2 = __toESM(require("@keystone-6/core"));
 var AttachmentModel = core2.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access2.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { name } 파일명
-       */
+      // 이름
       name: fields2.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { size } 파일크기
-       */
+      // 헤더
+      header: fields2.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 제목
+      title: fields2.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 내용
+      content: fields2.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 설명
+      description: fields2.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 크기
       size: fields2.integer(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { base64 } 파일Base64데이터
-       */
+      // Base64 데이터
       base64: fields2.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { extension } 파일확장자
-       */
+      // 확장자
       extension: fields2.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { type } 파일타입
-       */
+      // 타입 (0: 이미지, 1: 동영상, 2: 음악, 3: 문서, 4: 기타)
       type: fields2.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields2.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields2.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -219,66 +201,72 @@ var access3 = __toESM(require("@keystone-6/core/access"));
 var core3 = __toESM(require("@keystone-6/core"));
 var LocationModel = core3.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access3.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { name } 장소명
-       */
+      // 이름
       name: fields3.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { address } 장소주소
-       */
+      // 헤더
+      header: fields3.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 제목
+      title: fields3.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 내용
+      content: fields3.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 설명
+      description: fields3.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 주소
       address: fields3.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { addressDetail } 장소상세주소
-       */
+      // 상세 주소
       addressDetail: fields3.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { latitude } 위도
-       */
+      // 위도
       latitude: fields3.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { longitude } 경도
-       */
+      // 경도
       longitude: fields3.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields3.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields3.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -294,106 +282,78 @@ var access4 = __toESM(require("@keystone-6/core/access"));
 var core4 = __toESM(require("@keystone-6/core"));
 var PostModel = core4.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access4.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { title } 게시글제목
-       */
-      version: fields4.text(
+      // 이름
+      name: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { header } 게시글헤더
-       */
+      // 헤더
       header: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { title } 게시글제목
-       */
+      // 제목
       title: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { content } 게시글내용
-       */
+      // 내용
       content: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { description } 게시글설명
-       */
+      // 설명
       description: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { author } 게시글작성자
-       */
+      // 작성자
       author: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { status } 게시글상태
-       */
+      // 상태 (0: 비공개, 1: 공개)
       status: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { url } 게시글링크
-       */
+      // 링크
       url: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { isTopFixed } 게시글상단고정여부
-       */
+      // 상단 고정 여부
       isTopFixed: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { level } 게시글중요도여부
-       */
+      // 중요도 (0: 일반, 1: 중요)
       level: fields4.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields4.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields4.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -409,66 +369,48 @@ var access5 = __toESM(require("@keystone-6/core/access"));
 var core5 = __toESM(require("@keystone-6/core"));
 var RuleModel = core5.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access5.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { name } 규칙명
-       */
+      // 이름
       name: fields5.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { header } 규칙헤더
-       */
+      // 헤더
       header: fields5.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { title } 규칙제목
-       */
+      // 제목
       title: fields5.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { content } 규칙내용
-       */
+      // 내용
       content: fields5.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { description } 규칙설명
-       */
+      // 설명
       description: fields5.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields5.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields5.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -484,66 +426,48 @@ var access6 = __toESM(require("@keystone-6/core/access"));
 var core6 = __toESM(require("@keystone-6/core"));
 var TermsModel = core6.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access6.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { name } 약관명
-       */
+      // 이름
       name: fields6.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { header } 약관헤더
-       */
+      // 헤더
       header: fields6.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { title } 약관제목
-       */
+      // 제목
       title: fields6.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { content } 약관내용
-       */
+      // 내용
       content: fields6.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { description } 약관설명
-       */
+      // 설명
       description: fields6.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields6.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields6.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -605,116 +529,81 @@ var Log = (0, import_winston.createLogger)({
     new import_winston.transports.Console({ level: "d" })
   ]
 });
+var ErrorLog = (quickTag, message) => {
+  Log.e("[ " + quickTag + " ] \u2605 Error Start \u2605 " + message + "\n[ " + quickTag + " ] \u2605 Error End \u2605");
+};
 
 // data/model/UserModel.ts
 var UserModel = core7.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access7.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { level } 유저 레벨 (0: 자녀, 1: 학부모, 99: 관리자)
-       */
+      // 유저 레벨 (0: 자녀, 1: 학부모, 99: 관리자)
       level: fields7.integer(
         {
           validation: { isRequired: true },
           defaultValue: 0
         }
       ),
-      /**
-       * @param { name } 이름
-       */
+      // 이름
       name: fields7.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { email } 이름
-       */
+      // 이메일
       email: fields7.text(
         {
           validation: { isRequired: false },
           isIndexed: "unique"
         }
       ),
-      /**
-       * @param { password } 비밀번호
-       */
+      // 비밀번호
       password: fields7.password(
         {
           validation: { isRequired: true }
         }
       ),
-      /**
-       * @param { phone } 휴대폰번호
-       */
+      // 휴대폰 번호
       phone: fields7.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { address } 주소
-       */
+      // 주소
       address: fields7.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { addressDetail } 상세주소
-       */
+      // 상세 주소
       addressDetail: fields7.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { gender } 성별
-       */
+      // 성별 (0: 남성, 1: 여성)
       gender: fields7.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { birthDay } 생년월일
-       */
+      // 생년월일
       birthDay: fields7.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields7.timestamp(
         {
-          /**
-           * 그렇다면 이 필드는 Prisma 스키마의 이 필드에 속성 true을 추가합니다 .
-           * 이것은 이 필드가 요청에 명시적으로 설정되지 않은 경우 GraphQL API 또는 Prisma 클라이언트의
-           * 다른 사용으로 항목이 생성/업데이트될 때마다 이 필드를 현재 시간으로 업데이트합니다.
-           * 이는 데이터베이스가 아닌 Prisma 클라이언트 수준에서 발생하므로 데이터베이스의 항목을
-           * 직접 업데이트하면 필드가 자동으로 업데이트되지 않습니다.
-           */
           db: { updatedAt: true },
-          /**
-           * (기본값: undefined): ISO8601 형식의 날짜 시간 문자열이 있는 문자열 값이거나
-           * { kind: 'now' }. 이 값은 명시적 값이 설정되지 않은 경우 항목을 생성할 때 필드에 사용됩니다.
-           * 사용자가 처음 생성될 때 타임스탬프를 Date.now()로 설정합니다
-           */
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields7.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -734,7 +623,6 @@ var UserModel = core7.list(
         if (title) {
           return {
             ...resolvedData,
-            // Ensure the first letter of the title is capitalised
             title: title[0].toUpperCase() + title.slice(1)
           };
         }
@@ -750,74 +638,54 @@ var access8 = __toESM(require("@keystone-6/core/access"));
 var core8 = __toESM(require("@keystone-6/core"));
 var WebSiteInfoModel = core8.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access8.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { url } 웹사이트주소
-       */
+      // 주소
       url: fields8.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { name } 웹사이트명
-       */
+      // 이름
       name: fields8.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { header } 웹사이트헤더
-       */
+      // 헤더
       header: fields8.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { title } 웹사이트제목
-       */
+      // 제목
       title: fields8.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { content } 웹사이트내용
-       */
+      // 내용
       content: fields8.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { description } 웹사이트설명
-       */
+      // 설명
       description: fields8.text(
         {
           validation: { isRequired: false }
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields8.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields8.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -834,44 +702,32 @@ var core9 = __toESM(require("@keystone-6/core"));
 var import_fields = require("@keystone-6/core/fields");
 var WebSiteInfo_AppInfo_Model = core9.list(
   {
-    /**
-     * @param { access } 접근권한
-     */
+    // 접근 권한
     access: access9.allowAll,
-    /**
-     * @param { fields } 필드
-     */
+    // 필드 선언
     fields: {
-      /**
-       * @param { websiteId } 웹사이트아이디
-       */
+      // 웹 사이트 ID
       websiteId: (0, import_fields.relationship)(
         {
           ref: "WebSiteInfoModel",
           many: false
         }
       ),
-      /**
-       * @param [ appInfoList ] 앱정보리스트
-       */
+      // 앱 정보 ID 리스트
       appInfoList: (0, import_fields.relationship)(
         {
           ref: "AppInfoModel",
           many: true
         }
       ),
-      /**
-       * @param { updatedAt } 수정날짜
-       */
+      // 수정일
       updatedAt: fields9.timestamp(
         {
           db: { updatedAt: true },
           defaultValue: { kind: "now" }
         }
       ),
-      /**
-       * @param { createdAt } 생성날짜
-       */
+      // 생성일
       createdAt: fields9.timestamp(
         {
           defaultValue: { kind: "now" }
@@ -883,12 +739,17 @@ var WebSiteInfo_AppInfo_Model = core9.list(
 
 // common/JsonCommon.ts
 var Response = (data) => {
-  let code = 200;
+  let code = "200";
   let message = "OK";
   let result = [];
-  Log.d("data: " + data);
   if (data == null) {
     result = [];
+  } else if (typeof data == "boolean") {
+    return {
+      code,
+      message,
+      result: data
+    };
   } else {
     if (data instanceof Array) {
       result = data;
@@ -908,17 +769,25 @@ var UserUseCase = class {
   constructor(userRepository) {
     this.userRepository = userRepository;
   }
-  // TODO: 유저 상세 조회
+  // 유저 상세 조회
   async getUser(userId) {
-    const [user] = await Promise.all([this.userRepository.getUser(userId)]);
-    return user;
+    try {
+      const [user] = await Promise.all([this.userRepository.getUser(userId)]);
+      return user;
+    } catch (e) {
+      throw e;
+    }
   }
-  // TODO: 유저 목록 조회
+  // 유저 목록 조회
   async getUserList() {
-    const [userList] = await Promise.all([this.userRepository.getUserList()]);
-    return userList;
+    try {
+      const [userList] = await Promise.all([this.userRepository.getUserList()]);
+      return userList;
+    } catch (e) {
+      throw e;
+    }
   }
-  // TODO: 유저 생성
+  // 유저 생성
   async createUser(userData) {
     try {
       const [isCreate] = await Promise.all([this.userRepository.createUser(userData)]);
@@ -927,32 +796,52 @@ var UserUseCase = class {
       throw e;
     }
   }
-  // TODO: 유저 수정
+  // 유저 수정
   async modifyUser(userData) {
-    const [isModify] = await Promise.all([this.userRepository.modifyUser(userData)]);
-    return isModify;
+    try {
+      const [isModify] = await Promise.all([this.userRepository.modifyUser(userData)]);
+      return isModify;
+    } catch (e) {
+      throw e;
+    }
   }
-  // TODO: 유저 삭제
+  // 유저 삭제
   async deleteUser(userId) {
-    const [isDelete] = await Promise.all([this.userRepository.deleteUser(userId)]);
-    return isDelete;
+    try {
+      const [isDelete] = await Promise.all([this.userRepository.deleteUser(userId)]);
+      return isDelete;
+    } catch (e) {
+      throw e;
+    }
   }
 };
 
 // domain/model/UserData.ts
 var UserData = class {
   id;
+  // 고유 키
   name;
+  // 이름
   email;
+  // 이메일
   password;
+  // 비밀번호
   level;
+  // 권한 (0: 일반, 99: 관리자)
   phone;
+  // 전화번호
   address;
+  // 주소
   addressDetail;
+  // 상세주소
   gender;
+  // 성별 (0: 남성, 1: 여성)
   birthDay;
+  // 생년월일
   createdAt;
+  // 생성일
   updatedAt;
+  // 수정일
   constructor(id, name, email, password2, level, phone, address, addressDetail, gender, birthDay, createdAt, updatedAt) {
     this.id = id;
     this.name = name;
@@ -967,6 +856,7 @@ var UserData = class {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
+  // toString 오버라이딩
   toString() {
     return "id: " + this.id + ", name: " + this.name + ", email: " + this.email + ", password: " + this.password + ", level: " + this.level + ", phone: " + this.phone + ", address: " + this.address + ", addressDetail: " + this.addressDetail + ", gender: " + this.gender + ", birthDay: " + this.birthDay + ", createdAt: " + this.createdAt + ", updatedAt: " + this.updatedAt;
   }
@@ -1005,13 +895,15 @@ function toPrismaUserModel(userData) {
 
 // data/repository/UserRepository.ts
 var UserRepository = class {
+  // Express App
   app;
+  // Keystone Context
   context;
   constructor(app, context) {
     this.app = app;
     this.context = context;
   }
-  // TODO: 유저 상세 조회
+  // 유저 상세 조회
   getUser = async (userId) => {
     try {
       let findData = await this.context.db.UserModel.findOne({
@@ -1020,10 +912,11 @@ var UserRepository = class {
       });
       return toUserData(findData);
     } catch (e) {
+      ErrorLog("UserRepository", e);
       throw e;
     }
   };
-  // TODO: 유저 목록 조회
+  // 유저 목록 조회
   getUserList = async () => {
     try {
       let findList = await this.context.db.UserModel.findMany();
@@ -1036,10 +929,11 @@ var UserRepository = class {
       });
       return resultList;
     } catch (e) {
+      ErrorLog("UserRepository", e);
       throw e;
     }
   };
-  // TODO: 유저 생성
+  // 유저 생성
   createUser = async (userData) => {
     try {
       await this.context.db.UserModel.createOne({
@@ -1047,10 +941,11 @@ var UserRepository = class {
       });
       return true;
     } catch (e) {
+      ErrorLog("UserRepository", e);
       throw e;
     }
   };
-  // TODO: 유저 삭제
+  // 유저 삭제
   deleteUser = async (userId) => {
     try {
       await this.context.db.UserModel.deleteOne({
@@ -1059,10 +954,11 @@ var UserRepository = class {
       });
       return true;
     } catch (e) {
+      ErrorLog("UserRepository", e);
       throw e;
     }
   };
-  // TODO: 유저 수정
+  // 유저 수정
   modifyUser = async (userData) => {
     try {
       if (!userData.id) {
@@ -1076,6 +972,7 @@ var UserRepository = class {
       });
       return true;
     } catch (e) {
+      ErrorLog("UserRepository", e);
       throw e;
     }
   };
@@ -1085,7 +982,7 @@ var UserRepository = class {
 var getUserList = (app, commonContext) => {
   app.get(
     "/api/user",
-    async (req, res, next) => {
+    async (req, res, errorHandling) => {
       try {
         if (req.query.userId != null) {
           res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).getUser(req.query.userId)));
@@ -1093,7 +990,7 @@ var getUserList = (app, commonContext) => {
           res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).getUserList()));
         }
       } catch (e) {
-        next(e);
+        errorHandling(e);
       }
     }
   );
@@ -1101,7 +998,7 @@ var getUserList = (app, commonContext) => {
 var createUser = (app, commonContext) => {
   app.post(
     "/api/user",
-    async (req, res, next) => {
+    async (req, res, errorHandling) => {
       try {
         res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).createUser(new UserData(
           "",
@@ -1118,32 +1015,73 @@ var createUser = (app, commonContext) => {
           null
         ))));
       } catch (e) {
-        next(e);
+        errorHandling(e);
       }
     }
   );
+};
+var modifyUser = (app, commonContext) => {
+  app.put(
+    "/api/user",
+    async (req, res, errorHandling) => {
+      try {
+        res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).modifyUser(new UserData(
+          req.body.id,
+          req.body.name,
+          req.body.email,
+          req.body.password,
+          req.body.level,
+          req.body.phone,
+          req.body.address,
+          req.body.addressDetail,
+          req.body.gender,
+          req.body.birthDay,
+          null,
+          null
+        ))));
+      } catch (e) {
+        errorHandling(e);
+      }
+    }
+  );
+};
+var deleteUser = (app, commonContext) => {
+  app.delete("/api/user", async (req, res, errorHandling) => {
+    try {
+      res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).deleteUser(req.body.id)));
+    } catch (e) {
+      errorHandling(e);
+    }
+  });
 };
 
 // common/ErrorHandling.ts
 var import_graphql = require("graphql");
 var ErrorHandling = (error) => {
-  let code = "0";
-  let message = "FAILED";
-  let prismaErrorName = "";
+  let code = "P0";
   let target = "";
   if (error instanceof import_graphql.GraphQLError) {
-    prismaErrorName = error.extensions.prisma.name;
-    target = error.extensions.prisma.meta.target;
-    code = error.extensions.prisma.code;
-    message = error.message;
-    Log.d("prismaErrorName: " + prismaErrorName);
-    Log.d("target: " + target);
-    Log.d("code: " + code);
-    Log.d("message: " + message);
+    if (error.extensions.prisma != null) {
+      target = error.extensions.prisma.meta.target != null ? error.extensions.prisma.meta.target : "";
+      code = error.extensions.prisma.code != null ? error.extensions.prisma.code : "P0";
+    }
   } else if (error instanceof TypeError) {
     code = "P100";
+  } else {
+    code = "P0";
   }
+  return {
+    code,
+    message: target != "" ? getErrorMessage(code) + " ( " + target + " )" : getErrorMessage(code),
+    result: []
+  };
+};
+var getErrorMessage = (code) => {
+  let message = "";
   switch (code) {
+    case "P0":
+      message = "\uC54C \uC218 \uC5C6\uB294 \uC5D0\uB7EC \uCF54\uB4DC\uC785\uB2C8\uB2E4.";
+      break;
     case "P100":
       message = "\uC62C\uBC14\uB974\uC9C0 \uC54A\uB294 \uD0C0\uC785\uC774 \uC0AC\uC6A9\uB418\uC5C8\uC2B5\uB2C8\uB2E4.";
       break;
@@ -1417,17 +1355,12 @@ var ErrorHandling = (error) => {
     default:
       message = "\uC54C \uC218 \uC5C6\uB294 \uC5D0\uB7EC \uCF54\uB4DC\uC785\uB2C8\uB2E4.";
   }
-  if (target != "") {
-    message += " ( " + target + " )";
-  }
-  return {
-    code,
-    message,
-    result: {}
-  };
+  return message;
 };
 
 // keystone.ts
+var import_dotenv = __toESM(require("dotenv"));
+import_dotenv.default.config();
 var modelList = {
   // @ts-ignore
   "AppInfoModel": AppInfoModel,
@@ -1469,9 +1402,12 @@ var { withAuth } = auth.createAuth({
 var keystone_default = withAuth(
   core10.config({
     db: {
-      provider: "mysql",
-      url: "mysql://kwon@localhost:3306/kwondb",
+      // @ts-ignore
+      provider: process.env.DB_TYPE,
+      // @ts-ignore
+      url: process.env.DB_URL,
       onConnect: async (context) => {
+        Log.d("DB Connected");
       },
       enableLogging: true,
       idField: { kind: "uuid" }
@@ -1480,7 +1416,8 @@ var keystone_default = withAuth(
     session,
     server: {
       cors: { origin: ["http://localhost:3000", "http://localhost:3306"], credentials: true },
-      port: 8888,
+      // @ts-ignore
+      port: process.env.SERVER_PORT,
       maxFileSize: 200 * 1024 * 1024,
       extendExpressApp: (app, commonContext) => {
         let bodyParser = require("body-parser");
@@ -1488,8 +1425,9 @@ var keystone_default = withAuth(
         app.use(bodyParser.urlencoded({ extended: true }));
         getUserList(app, commonContext);
         createUser(app, commonContext);
+        modifyUser(app, commonContext);
+        deleteUser(app, commonContext);
         app.use((err, req, res, next) => {
-          Log.d("ErrorHandling err: " + err);
           return res.json(ErrorHandling(err));
         });
       },

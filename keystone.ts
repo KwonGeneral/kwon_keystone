@@ -2,9 +2,6 @@ import * as crypto from 'crypto';
 import * as auth from '@keystone-6/auth';
 import * as core_session from '@keystone-6/core/session';
 import * as core from '@keystone-6/core';
-import * as fields from '@keystone-6/core/fields';
-import * as fields_document from '@keystone-6/fields-document';
-import * as access from '@keystone-6/core/access';
 import * as type from '.keystone/types';
 import {AppInfoModel} from './data/model/AppInfoModel'
 import {AttachmentModel} from './data/model/AttachmentModel'
@@ -15,8 +12,15 @@ import {TermsModel} from './data/model/TermsModel'
 import {UserModel} from './data/model/UserModel'
 import {WebSiteInfoModel} from './data/model/WebSiteInfoModel'
 import {WebSiteInfo_AppInfo_Model} from "./data/model/WebSiteInfo_AppInfo_Model";
-import {createUser, getUserList} from "./presenter/api/UserApi";
+import {createUser, deleteUser, getUserList, modifyUser} from "./presenter/api/UserApi";
+import {Log} from "./common/logger";
+import {ErrorHandling} from "./common/ErrorHandling";
+import dotenv from 'dotenv';
 
+/**
+ * 환경변수 설정
+ */
+dotenv.config();
 
 /**
  * 모델 정의
@@ -73,19 +77,15 @@ const {withAuth} = auth.createAuth({
 /**
  * KeystoneJS 설정
  */
-
-// Primsa
-import {PrismaClient} from '@prisma/client'
-import {Log} from "./common/logger";
-import {GraphQLError} from "graphql";
-import {ErrorHandling} from "./common/ErrorHandling";
-
 export default withAuth(
     core.config({
         db: {
-            provider: 'mysql',
-            url: 'mysql://kwon@localhost:3306/kwondb',
-            onConnect: async context => { /* ... */
+            // @ts-ignore
+            provider: process.env.DB_TYPE,
+            // @ts-ignore
+            url: process.env.DB_URL,
+            onConnect: async context => {
+                Log.d("DB Connected");
             },
             enableLogging: true,
             idField: {kind: 'uuid'},
@@ -94,7 +94,8 @@ export default withAuth(
         session: session,
         server: {
             cors: {origin: ['http://localhost:3000', 'http://localhost:3306'], credentials: true},
-            port: 8888,
+            // @ts-ignore
+            port: process.env.SERVER_PORT,
             maxFileSize: 200 * 1024 * 1024,
             extendExpressApp: (app, commonContext) => {
                 let bodyParser = require('body-parser');
@@ -103,9 +104,10 @@ export default withAuth(
 
                 getUserList(app, commonContext);
                 createUser(app, commonContext);
+                modifyUser(app, commonContext);
+                deleteUser(app, commonContext);
 
                 app.use((err: any, req: any, res: any, next: any) => {
-                    Log.d("ErrorHandling err: " + err);
                     return res.json(ErrorHandling(err));
                 });
             },

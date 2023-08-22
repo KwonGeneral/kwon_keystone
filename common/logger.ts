@@ -1,11 +1,13 @@
 import winston, { Logger, createLogger, transports, format, config } from 'winston';
 
+// winston의 로그 레벨
 interface TransformableInfo {
   level: string;
   message: string;
   [key: string]: any;
 }
 
+// winston의 기본 로그 레벨
 const logger = createLogger({
   transports: [
     new transports.Console({
@@ -40,9 +42,10 @@ const customColors: config.AbstractConfigSetColors = {
   s: 'gray'
 }
 
-// 색상을 추가하고싶다면 winston에게 이를 알려야한다. (README 참고)
+// 색상을 추가
 winston.addColors(customColors);
 
+// 커스텀 로그 레벨을 사용하기 위해 Logger를 상속받아서 사용
 interface CustomLevels extends winston.Logger {
   e: winston.LeveledLogMethod;
   w: winston.LeveledLogMethod;
@@ -51,6 +54,7 @@ interface CustomLevels extends winston.Logger {
   s: winston.LeveledLogMethod;
 }
 
+// 커스텀 로그 레벨
 export const Log: CustomLevels = <CustomLevels>createLogger({
   levels: customLevels,
   format: format.combine(
@@ -65,3 +69,8 @@ export const Log: CustomLevels = <CustomLevels>createLogger({
     new transports.Console({ level: 'd' })
   ]
 });
+
+// 에러 로그 출력
+export const ErrorLog = (quickTag: string, message: any) => {
+    Log.e("[ " + quickTag + " ] ★ Error Start ★ " + message + "\n[ " + quickTag + " ] ★ Error End ★");
+}

@@ -141,6 +141,10 @@ input AppInfoModelCreateInput {
 type AttachmentModel {
   id: ID!
   name: String
+  header: String
+  title: String
+  content: String
+  description: String
   size: Int
   base64: String
   extension: String
@@ -159,6 +163,10 @@ input AttachmentModelWhereInput {
   NOT: [AttachmentModelWhereInput!]
   id: IDFilter
   name: StringFilter
+  header: StringFilter
+  title: StringFilter
+  content: StringFilter
+  description: StringFilter
   size: IntNullableFilter
   base64: StringFilter
   extension: StringFilter
@@ -181,6 +189,10 @@ input IntNullableFilter {
 input AttachmentModelOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  header: OrderDirection
+  title: OrderDirection
+  content: OrderDirection
+  description: OrderDirection
   size: OrderDirection
   base64: OrderDirection
   extension: OrderDirection
@@ -191,6 +203,10 @@ input AttachmentModelOrderByInput {
 
 input AttachmentModelUpdateInput {
   name: String
+  header: String
+  title: String
+  content: String
+  description: String
   size: Int
   base64: String
   extension: String
@@ -206,6 +222,10 @@ input AttachmentModelUpdateArgs {
 
 input AttachmentModelCreateInput {
   name: String
+  header: String
+  title: String
+  content: String
+  description: String
   size: Int
   base64: String
   extension: String
@@ -217,6 +237,10 @@ input AttachmentModelCreateInput {
 type LocationModel {
   id: ID!
   name: String
+  header: String
+  title: String
+  content: String
+  description: String
   address: String
   addressDetail: String
   latitude: String
@@ -235,6 +259,10 @@ input LocationModelWhereInput {
   NOT: [LocationModelWhereInput!]
   id: IDFilter
   name: StringFilter
+  header: StringFilter
+  title: StringFilter
+  content: StringFilter
+  description: StringFilter
   address: StringFilter
   addressDetail: StringFilter
   latitude: StringFilter
@@ -246,6 +274,10 @@ input LocationModelWhereInput {
 input LocationModelOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  header: OrderDirection
+  title: OrderDirection
+  content: OrderDirection
+  description: OrderDirection
   address: OrderDirection
   addressDetail: OrderDirection
   latitude: OrderDirection
@@ -256,6 +288,10 @@ input LocationModelOrderByInput {
 
 input LocationModelUpdateInput {
   name: String
+  header: String
+  title: String
+  content: String
+  description: String
   address: String
   addressDetail: String
   latitude: String
@@ -271,6 +307,10 @@ input LocationModelUpdateArgs {
 
 input LocationModelCreateInput {
   name: String
+  header: String
+  title: String
+  content: String
+  description: String
   address: String
   addressDetail: String
   latitude: String
@@ -281,7 +321,7 @@ input LocationModelCreateInput {
 
 type PostModel {
   id: ID!
-  version: String
+  name: String
   header: String
   title: String
   content: String
@@ -304,7 +344,7 @@ input PostModelWhereInput {
   OR: [PostModelWhereInput!]
   NOT: [PostModelWhereInput!]
   id: IDFilter
-  version: StringFilter
+  name: StringFilter
   header: StringFilter
   title: StringFilter
   content: StringFilter
@@ -320,7 +360,7 @@ input PostModelWhereInput {
 
 input PostModelOrderByInput {
   id: OrderDirection
-  version: OrderDirection
+  name: OrderDirection
   header: OrderDirection
   title: OrderDirection
   content: OrderDirection
@@ -335,7 +375,7 @@ input PostModelOrderByInput {
 }
 
 input PostModelUpdateInput {
-  version: String
+  name: String
   header: String
   title: String
   content: String
@@ -355,7 +395,7 @@ input PostModelUpdateArgs {
 }
 
 input PostModelCreateInput {
-  version: String
+  name: String
   header: String
   title: String
   content: String

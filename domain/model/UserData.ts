@@ -77,7 +77,7 @@ export function toUserData(userModel: any): UserData | null {
  * 유저 데이터를 플라즈마 유저 모델로 변환
  * @param userData 유저 데이터
  */
-export function toPrismaUserModel(userData: UserData): Partial<PrismaUserModel> {
+export function toUserModel(userData: UserData): Partial<PrismaUserModel> {
     return {
         name: userData.name,
         email: userData.email,

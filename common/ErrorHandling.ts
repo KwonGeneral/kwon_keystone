@@ -26,6 +26,14 @@ export const ErrorHandling = (error: any): { result: any; code: string; message:
     }
 }
 
+export const MissingParameterError = (parameter: string) => {
+    return {
+        code: "P200",
+        message: "필수 파라미터 누락 [ " + parameter + " ]",
+        result: []
+    }
+}
+
 // 에러 코드에 따른 에러 메시지 반환
 const getErrorMessage = (code: string): string => {
     let message = "";
@@ -308,4 +316,8 @@ const getErrorMessage = (code: string): string => {
     }
 
     return message;
+}
+
+export const CreateGraphQLError = (code: string, data: string): GraphQLError => {
+    return new GraphQLError(getErrorMessage(code) + " ( " + data + " )");
 }

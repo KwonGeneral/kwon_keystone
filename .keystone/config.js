@@ -879,7 +879,7 @@ function toUserData(userModel) {
     userModel.updatedAt
   );
 }
-function toPrismaUserModel(userData) {
+function toUserModel(userData) {
   return {
     name: userData.name,
     email: userData.email,
@@ -937,7 +937,7 @@ var UserRepository = class {
   createUser = async (userData) => {
     try {
       await this.context.db.UserModel.createOne({
-        data: toPrismaUserModel(userData)
+        data: toUserModel(userData)
       });
       return true;
     } catch (e) {
@@ -967,8 +967,7 @@ var UserRepository = class {
       }
       await this.context.db.UserModel.updateOne({
         where: { id: userData.id.toString() },
-        // Assuming id is of type string in PrismaUserModel
-        data: toPrismaUserModel(userData)
+        data: toUserModel(userData)
       });
       return true;
     } catch (e) {

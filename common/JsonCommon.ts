@@ -29,3 +29,11 @@ export const Response = (data: any): { result: any; code: string; message: strin
         result: result,
     }
 }
+
+export const CustomResponse = (code: string, message: string, data: any): { result: any; code: string; message: string } => {
+    return {
+        code: code,
+        message: message,
+        result: data,
+    }
+}

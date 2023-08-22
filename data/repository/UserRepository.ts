@@ -1,8 +1,10 @@
 import {UserRepositoryImpl} from "../../domain/repository/UserRepositoryImpl";
-import {toUserData, UserData, toPrismaUserModel} from "../../domain/model/UserData";
+import {toUserData, UserData, toUserModel} from "../../domain/model/UserData";
 import e from "express";
 import {BaseKeystoneTypeInfo, KeystoneContext} from "@keystone-6/core/dist/declarations/src/types";
 import {ErrorLog, Log} from "../../common/logger";
+import {GraphQLError} from "graphql";
+import {CreateGraphQLError, MissingParameterError} from "../../common/ErrorHandling";
 
 /**
  * 유저 관련 Repository
@@ -56,7 +58,7 @@ export class UserRepository implements UserRepositoryImpl {
     createUser = async (userData: UserData): Promise<boolean> => {
         try {
             await this.context.db.UserModel.createOne({
-                data: toPrismaUserModel(userData)
+                data: toUserModel(userData)
             });
             return true;
         } catch (e) {
@@ -86,8 +88,8 @@ export class UserRepository implements UserRepositoryImpl {
                 return false;
             }
             await this.context.db.UserModel.updateOne({
-                where: {id: userData.id.toString()},  // Assuming id is of type string in PrismaUserModel
-                data: toPrismaUserModel(userData)
+                where: {id: userData.id.toString()},
+                data: toUserModel(userData)
             });
             return true;
         } catch (e) {

@@ -2,7 +2,7 @@
  * API 응답 Format
  * @param data Response Data
  */
-export const Response = (data: any): { result: any; code: string; message: string } => {
+export const Response = (data: any): { result: any; data: any; } => {
     let code = "200";
     let message = 'OK';
     let result: Array<Object> = [];
@@ -11,9 +11,11 @@ export const Response = (data: any): { result: any; code: string; message: strin
         result = [];
     } else if (typeof data == 'boolean') {
         return {
-            code: code,
-            message: message,
-            result: data,
+            result: {
+                code: code,
+                message: message,
+            },
+            data: data,
         }
     } else {
         if (data instanceof Array) {
@@ -24,16 +26,20 @@ export const Response = (data: any): { result: any; code: string; message: strin
     }
 
     return {
-        code: code,
-        message: message,
-        result: result,
+        result: {
+            code: code,
+            message: message,
+        },
+        data: data,
     }
 }
 
-export const CustomResponse = (code: string, message: string, data: any): { result: any; code: string; message: string } => {
+export const CustomResponse = (code: string, message: string, data: any): { result: any, data: any } => {
     return {
-        code: code,
-        message: message,
-        result: data,
+        result: {
+            code: code,
+            message: message,
+        },
+        data: data,
     }
 }

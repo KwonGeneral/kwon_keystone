@@ -132,3 +132,10 @@ model WebSiteInfo_AppInfo_Model {
 
   @@index([websiteIdId])
 }
+
+model LogModel {
+  id        String    @id @default(uuid())
+  name      String    @default("")
+  updatedAt DateTime? @default(now()) @updatedAt
+  createdAt DateTime? @default(now())
+}

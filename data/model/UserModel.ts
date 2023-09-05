@@ -84,22 +84,12 @@ export let UserModel: core.ListConfig<BaseListTypeInfo> = core.list(
             )
         },
         hooks: {
-            beforeOperation: async ({operation, listKey, context, resolvedData}) => {
-                Log.d("beforeOperation: " + operation)
-            },
             afterOperation: async ({operation, listKey, context, resolvedData}) => {
-                Log.d("afterOperation: " + operation)
-            },
-            resolveInput: ({resolvedData}) => {
-                Log.d("resolveInput: " + resolvedData)
-                const {title} = resolvedData;
-                if (title) {
-                    return {
-                        ...resolvedData,
-                        title: title[0].toUpperCase() + title.slice(1)
+                await context.db.LogModel.createOne({
+                    data: {
+                        name: operation + " " + listKey,
                     }
-                }
-                return resolvedData;
+                })
             }
         }
     }

@@ -16,6 +16,7 @@ import {createUser, deleteUser, getUserList, modifyUser} from "./presenter/api/U
 import {Log} from "./common/logger";
 import {ErrorHandling} from "./common/ErrorHandling";
 import dotenv from 'dotenv';
+import {LogModel} from "./data/model/LogModel";
 
 /**
  * 환경변수 설정
@@ -44,6 +45,8 @@ export const modelList: type.Lists = {
     'WebSiteInfoModel': WebSiteInfoModel,
     // @ts-ignore
     'WebSiteInfo_AppInfo_Model': WebSiteInfo_AppInfo_Model,
+    // @ts-ignore
+    'LogModel': LogModel,
 }
 
 /**
@@ -93,7 +96,13 @@ export default withAuth(
         lists: (modelList),
         session: session,
         server: {
-            cors: {origin: ['http://localhost:3000', 'http://localhost:3306'], credentials: true},
+            options: {
+                // @ts-ignore
+                host: process.env.SERVER_HOST,
+                // @ts-ignore
+                port: process.env.SERVER_PORT,
+            },
+            cors: {origin: ['*'], credentials: true},
             // @ts-ignore
             port: process.env.SERVER_PORT,
             maxFileSize: 200 * 1024 * 1024,

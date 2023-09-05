@@ -3,7 +3,7 @@ import {GraphQLError} from "graphql";
 /**
  * 에러 핸들링
  */
-export const ErrorHandling = (error: any): { result: any; code: string; message: string } => {
+export const ErrorHandling = (error: any): { result: any; data: any; } => {
     let code: string = "P0";
     let target: string = "";
     if (error instanceof GraphQLError) {
@@ -20,9 +20,11 @@ export const ErrorHandling = (error: any): { result: any; code: string; message:
     }
 
     return {
-        code: code,
-        message: target != "" ? getErrorMessage(code) + " ( " + target + " )" : getErrorMessage(code),
-        result: []
+        result: {
+            code: code,
+            message: target != "" ? getErrorMessage(code) + " ( " + target + " )" : getErrorMessage(code),
+        },
+        data: [],
     }
 }
 

@@ -37,7 +37,7 @@ module.exports = __toCommonJS(keystone_exports);
 var crypto = __toESM(require("crypto"));
 var auth = __toESM(require("@keystone-6/auth"));
 var core_session = __toESM(require("@keystone-6/core/session"));
-var core10 = __toESM(require("@keystone-6/core"));
+var core11 = __toESM(require("@keystone-6/core"));
 
 // data/model/AppInfoModel.ts
 var fields = __toESM(require("@keystone-6/core/fields"));
@@ -481,59 +481,6 @@ var TermsModel = core6.list(
 var fields7 = __toESM(require("@keystone-6/core/fields"));
 var access7 = __toESM(require("@keystone-6/core/access"));
 var core7 = __toESM(require("@keystone-6/core"));
-
-// common/logger.ts
-var import_winston = __toESM(require("winston"));
-var logger = (0, import_winston.createLogger)({
-  transports: [
-    new import_winston.transports.Console({
-      level: "debug",
-      format: import_winston.format.combine(
-        import_winston.format.label({ label: "[my-server]" }),
-        import_winston.format.timestamp({
-          format: "YYYY-MM-DD HH:mm:ss"
-        }),
-        import_winston.format.colorize(),
-        import_winston.format.printf((i) => `${i.timestamp} - ${i.level}: ${i.label} ${i.message}`)
-      )
-    })
-  ]
-});
-var customLevels = {
-  e: 0,
-  w: 1,
-  i: 2,
-  d: 3,
-  s: 4
-};
-var customColors = {
-  e: "red",
-  w: "yellow",
-  i: "cyan",
-  d: "magenta",
-  s: "gray"
-};
-import_winston.default.addColors(customColors);
-var Log = (0, import_winston.createLogger)({
-  levels: customLevels,
-  format: import_winston.format.combine(
-    import_winston.format.label({ label: "[KWON_LOG]" }),
-    import_winston.format.timestamp({
-      format: "YYYY-MM-DD HH:mm:ss"
-    }),
-    import_winston.format.colorize(),
-    // 색상을 보고싶다면 꼭 추가!
-    import_winston.format.printf((i) => `${i.timestamp} - ${i.level}: ${i.label} ${i.message}`)
-  ),
-  transports: [
-    new import_winston.transports.Console({ level: "d" })
-  ]
-});
-var ErrorLog = (quickTag, message) => {
-  Log.e("[ " + quickTag + " ] \u2605 Error Start \u2605 " + message + "\n[ " + quickTag + " ] \u2605 Error End \u2605");
-};
-
-// data/model/UserModel.ts
 var UserModel = core7.list(
   {
     // 접근 권한
@@ -611,22 +558,12 @@ var UserModel = core7.list(
       )
     },
     hooks: {
-      beforeOperation: async ({ operation, listKey, context, resolvedData }) => {
-        Log.d("beforeOperation: " + operation);
-      },
       afterOperation: async ({ operation, listKey, context, resolvedData }) => {
-        Log.d("afterOperation: " + operation);
-      },
-      resolveInput: ({ resolvedData }) => {
-        Log.d("resolveInput: " + resolvedData);
-        const { title } = resolvedData;
-        if (title) {
-          return {
-            ...resolvedData,
-            title: title[0].toUpperCase() + title.slice(1)
-          };
-        }
-        return resolvedData;
+        await context.db.LogModel.createOne({
+          data: {
+            name: operation + " " + listKey
+          }
+        });
       }
     }
   }
@@ -746,9 +683,11 @@ var Response = (data) => {
     result = [];
   } else if (typeof data == "boolean") {
     return {
-      code,
-      message,
-      result: data
+      result: {
+        code,
+        message
+      },
+      data
     };
   } else {
     if (data instanceof Array) {
@@ -758,9 +697,11 @@ var Response = (data) => {
     }
   }
   return {
-    code,
-    message,
-    result
+    result: {
+      code,
+      message
+    },
+    data
   };
 };
 
@@ -893,6 +834,57 @@ function toUserModel(userData) {
   };
 }
 
+// common/logger.ts
+var import_winston = __toESM(require("winston"));
+var logger = (0, import_winston.createLogger)({
+  transports: [
+    new import_winston.transports.Console({
+      level: "debug",
+      format: import_winston.format.combine(
+        import_winston.format.label({ label: "[my-server]" }),
+        import_winston.format.timestamp({
+          format: "YYYY-MM-DD HH:mm:ss"
+        }),
+        import_winston.format.colorize(),
+        import_winston.format.printf((i) => `${i.timestamp} - ${i.level}: ${i.label} ${i.message}`)
+      )
+    })
+  ]
+});
+var customLevels = {
+  e: 0,
+  w: 1,
+  i: 2,
+  d: 3,
+  s: 4
+};
+var customColors = {
+  e: "red",
+  w: "yellow",
+  i: "cyan",
+  d: "magenta",
+  s: "gray"
+};
+import_winston.default.addColors(customColors);
+var Log = (0, import_winston.createLogger)({
+  levels: customLevels,
+  format: import_winston.format.combine(
+    import_winston.format.label({ label: "[KWON_LOG]" }),
+    import_winston.format.timestamp({
+      format: "YYYY-MM-DD HH:mm:ss"
+    }),
+    import_winston.format.colorize(),
+    // 색상을 보고싶다면 꼭 추가!
+    import_winston.format.printf((i) => `${i.timestamp} - ${i.level}: ${i.label} ${i.message}`)
+  ),
+  transports: [
+    new import_winston.transports.Console({ level: "d" })
+  ]
+});
+var ErrorLog = (quickTag, message) => {
+  Log.e("[ " + quickTag + " ] \u2605 Error Start \u2605 " + message + "\n[ " + quickTag + " ] \u2605 Error End \u2605");
+};
+
 // data/repository/UserRepository.ts
 var UserRepository = class {
   // Express App
@@ -983,7 +975,7 @@ var getUserList = (app, commonContext) => {
     "/api/user",
     async (req, res, errorHandling) => {
       try {
-        if (req.query.userId != null) {
+        if (req.query.userId != null && req.query.userId != "") {
           res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).getUser(req.query.userId)));
         } else {
           res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).getUserList()));
@@ -1070,9 +1062,11 @@ var ErrorHandling = (error) => {
     code = "P0";
   }
   return {
-    code,
-    message: target != "" ? getErrorMessage(code) + " ( " + target + " )" : getErrorMessage(code),
-    result: []
+    result: {
+      code,
+      message: target != "" ? getErrorMessage(code) + " ( " + target + " )" : getErrorMessage(code)
+    },
+    data: []
   };
 };
 var getErrorMessage = (code) => {
@@ -1359,6 +1353,41 @@ var getErrorMessage = (code) => {
 
 // keystone.ts
 var import_dotenv = __toESM(require("dotenv"));
+
+// data/model/LogModel.ts
+var fields10 = __toESM(require("@keystone-6/core/fields"));
+var access10 = __toESM(require("@keystone-6/core/access"));
+var core10 = __toESM(require("@keystone-6/core"));
+var LogModel = core10.list(
+  {
+    // 접근 권한
+    access: access10.allowAll,
+    // 필드 선언
+    fields: {
+      // 이름
+      name: fields10.text(
+        {
+          validation: { isRequired: false }
+        }
+      ),
+      // 수정일
+      updatedAt: fields10.timestamp(
+        {
+          db: { updatedAt: true },
+          defaultValue: { kind: "now" }
+        }
+      ),
+      // 생성일
+      createdAt: fields10.timestamp(
+        {
+          defaultValue: { kind: "now" }
+        }
+      )
+    }
+  }
+);
+
+// keystone.ts
 import_dotenv.default.config();
 var modelList = {
   // @ts-ignore
@@ -1378,7 +1407,9 @@ var modelList = {
   // @ts-ignore
   "WebSiteInfoModel": WebSiteInfoModel,
   // @ts-ignore
-  "WebSiteInfo_AppInfo_Model": WebSiteInfo_AppInfo_Model
+  "WebSiteInfo_AppInfo_Model": WebSiteInfo_AppInfo_Model,
+  // @ts-ignore
+  "LogModel": LogModel
 };
 var sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== "production") {
@@ -1399,7 +1430,7 @@ var { withAuth } = auth.createAuth({
   }
 });
 var keystone_default = withAuth(
-  core10.config({
+  core11.config({
     db: {
       // @ts-ignore
       provider: process.env.DB_TYPE,
@@ -1414,7 +1445,13 @@ var keystone_default = withAuth(
     lists: modelList,
     session,
     server: {
-      cors: { origin: ["http://localhost:3000", "http://localhost:3306"], credentials: true },
+      options: {
+        // @ts-ignore
+        host: process.env.SERVER_HOST,
+        // @ts-ignore
+        port: process.env.SERVER_PORT
+      },
+      cors: { origin: ["*"], credentials: true },
       // @ts-ignore
       port: process.env.SERVER_PORT,
       maxFileSize: 200 * 1024 * 1024,

@@ -786,6 +786,51 @@ input AppInfoModelRelateToManyForCreateInput {
   connect: [AppInfoModelWhereUniqueInput!]
 }
 
+type LogModel {
+  id: ID!
+  name: String
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+input LogModelWhereUniqueInput {
+  id: ID
+}
+
+input LogModelWhereInput {
+  AND: [LogModelWhereInput!]
+  OR: [LogModelWhereInput!]
+  NOT: [LogModelWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  updatedAt: DateTimeNullableFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input LogModelOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  updatedAt: OrderDirection
+  createdAt: OrderDirection
+}
+
+input LogModelUpdateInput {
+  name: String
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+input LogModelUpdateArgs {
+  where: LogModelWhereUniqueInput!
+  data: LogModelUpdateInput!
+}
+
+input LogModelCreateInput {
+  name: String
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -846,6 +891,12 @@ type Mutation {
   updateWebSiteInfoAppInfoModels(data: [WebSiteInfo_AppInfo_ModelUpdateArgs!]!): [WebSiteInfo_AppInfo_Model]
   deleteWebSiteInfo_AppInfo_Model(where: WebSiteInfo_AppInfo_ModelWhereUniqueInput!): WebSiteInfo_AppInfo_Model
   deleteWebSiteInfoAppInfoModels(where: [WebSiteInfo_AppInfo_ModelWhereUniqueInput!]!): [WebSiteInfo_AppInfo_Model]
+  createLogModel(data: LogModelCreateInput!): LogModel
+  createLogModels(data: [LogModelCreateInput!]!): [LogModel]
+  updateLogModel(where: LogModelWhereUniqueInput!, data: LogModelUpdateInput!): LogModel
+  updateLogModels(data: [LogModelUpdateArgs!]!): [LogModel]
+  deleteLogModel(where: LogModelWhereUniqueInput!): LogModel
+  deleteLogModels(where: [LogModelWhereUniqueInput!]!): [LogModel]
   endSession: Boolean!
   authenticateUserModelWithPassword(email: String!, password: String!): UserModelAuthenticationWithPasswordResult
   createInitialUserModel(data: CreateInitialUserModelInput!): UserModelAuthenticationWithPasswordSuccess!
@@ -897,6 +948,9 @@ type Query {
   webSiteInfoAppInfoModels(where: WebSiteInfo_AppInfo_ModelWhereInput! = {}, orderBy: [WebSiteInfo_AppInfo_ModelOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: WebSiteInfo_AppInfo_ModelWhereUniqueInput): [WebSiteInfo_AppInfo_Model!]
   webSiteInfo_AppInfo_Model(where: WebSiteInfo_AppInfo_ModelWhereUniqueInput!): WebSiteInfo_AppInfo_Model
   webSiteInfoAppInfoModelsCount(where: WebSiteInfo_AppInfo_ModelWhereInput! = {}): Int
+  logModels(where: LogModelWhereInput! = {}, orderBy: [LogModelOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LogModelWhereUniqueInput): [LogModel!]
+  logModel(where: LogModelWhereUniqueInput!): LogModel
+  logModelsCount(where: LogModelWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

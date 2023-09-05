@@ -974,10 +974,13 @@ var getUserList = (app, commonContext) => {
   app.get(
     "/api/user",
     async (req, res, errorHandling) => {
+      Log.d("getUserList");
       try {
         if (req.query.userId != null && req.query.userId != "") {
+          Log.d("userId 0: " + req.query.userId);
           res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).getUser(req.query.userId)));
         } else {
+          Log.d("userId 1: " + req.query.userId);
           res.json(Response(await new UserUseCase(new UserRepository(app, commonContext)).getUserList()));
         }
       } catch (e) {
@@ -1459,6 +1462,7 @@ var keystone_default = withAuth(
         let bodyParser = require("body-parser");
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
+        Log.d("extendExpressApp");
         getUserList(app, commonContext);
         createUser(app, commonContext);
         modifyUser(app, commonContext);
